@@ -105,10 +105,28 @@ main {
   font-weight: normal;
 }
 
+/* ─── カードラベル ──────────────────────── */
+.card-label {
+  padding: 7px 16px 6px;
+  background: #F5F8FC;
+  border-bottom: 1px solid #D0DCE8;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.label-main {
+  font-weight: bold;
+  color: var(--hcolor);
+  font-size: 17px;
+}
+.label-sub { color: #666; }
+
 /* ─── カードボディ ──────────────────────── */
 .card-body { padding: 12px 14px 0; }
 
-/* ── 3列グリッド（行1） ─── */
+/* ── 3列グリッド ─── */
 .row3 {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -121,7 +139,7 @@ main {
 .row3 .sec { border-right: 1px solid #D0DCE8; }
 .row3 .sec:last-child { border-right: none; }
 
-/* ── 2列グリッド（行2） ─── */
+/* ── 2列グリッド ─── */
 .row2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -133,6 +151,16 @@ main {
 }
 .row2 .sec { border-right: 1px solid #D0DCE8; }
 .row2 .sec:last-child { border-right: none; }
+
+/* ── 1列グリッド ─── */
+.row1 {
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid #D0DCE8;
+  border-radius: 7px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
 
 /* ── セクション共通 ──── */
 .sec {
@@ -165,23 +193,15 @@ main {
 }
 
 /* ── 各セクションの色 ──── */
-/* 予約の基本ルール */
-.sec.s-rule {
+/* 予約方法 */
+.sec.s-method {
   background: #EBF3FB;
   border-left: 4px solid #2E75B6;
 }
-.sec.s-rule .sec-label { color: #1A4E8A; }
-.sec.s-rule .sec-label::before { background: #2E75B6; }
+.sec.s-method .sec-label { color: #1A4E8A; }
+.sec.s-method .sec-label::before { background: #2E75B6; }
 
-/* 予約方法と連絡先 */
-.sec.s-contact {
-  background: #EAF5EE;
-  border-left: 4px solid #2D8B4E;
-}
-.sec.s-contact .sec-label { color: #1A5C32; }
-.sec.s-contact .sec-label::before { background: #2D8B4E; }
-
-/* 当院が準備するもの */
+/* 書類の準備 */
 .sec.s-prepare {
   background: #F2ECFA;
   border-left: 4px solid #7B4FB0;
@@ -189,7 +209,7 @@ main {
 .sec.s-prepare .sec-label { color: #4A1F7A; }
 .sec.s-prepare .sec-label::before { background: #7B4FB0; }
 
-/* 患者さんへの説明 */
+/* 患者への説明 */
 .sec.s-patient {
   background: #FFF4EB;
   border-left: 4px solid #D97706;
@@ -197,7 +217,15 @@ main {
 .sec.s-patient .sec-label { color: #7A3C00; }
 .sec.s-patient .sec-label::before { background: #D97706; }
 
-/* 備考（目立たせない） */
+/* 結果について */
+.sec.s-result {
+  background: #E8F5EF;
+  border-left: 4px solid #2E8B50;
+}
+.sec.s-result .sec-label { color: #1A5C32; }
+.sec.s-result .sec-label::before { background: #2E8B50; }
+
+/* 備考 */
 .sec.s-note {
   background: #F7F7F7;
   border-left: 4px solid #999;
@@ -254,6 +282,47 @@ footer {
   background: #F0F6FF;
 }
 .detail-file-link:hover { background: #DDE9F8; text-decoration: none; }
+
+/* ─── カード内タブ ──────────────────────── */
+.card-tabs {
+  display: flex;
+  gap: 8px;
+  padding: 10px 14px 0;
+  background: #E8EFF7;
+  border-bottom: 3px solid #C7D8EA;
+}
+.ctab {
+  padding: 8px 24px 10px;
+  font-size: 17px;
+  font-weight: bold;
+  border: 2px solid #B0C4D8;
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+  background: #C8D8E8;
+  color: #555;
+  cursor: pointer;
+  font-family: inherit;
+  transition: .15s;
+  position: relative;
+  bottom: -3px;
+}
+.ctab:hover { background: #D8E8F5; color: #1A3A60; }
+.ctab.active {
+  background: #fff;
+  color: var(--hcolor);
+  border-color: #C7D8EA;
+  border-bottom-color: #fff;
+  z-index: 1;
+}
+.tab-pane { display: none; }
+.tab-pane.active { display: block; }
+
+/* ─── インラインリンク ───────────────────── */
+.inline-link {
+  color: #1A62B5;
+  text-decoration: underline;
+}
+.inline-link:hover { color: #0A3D8A; }
 </style>
 </head>
 <body>
@@ -261,7 +330,7 @@ footer {
 <!-- ページヘッダー -->
 <div class="page-header">
   <h1>紹介先病院一覧</h1>
-  <p>各病院公式サイトをもとに確認・作成（2026年3月）。変更の可能性があるため最新情報は各病院地域連携室へ直接ご確認ください。</p>
+  <p>各病院公式サイト・電話確認をもとに作成（2026年4月更新）。変更の可能性があるため最新情報は各病院地域連携室へ直接ご確認ください。</p>
 </div>
 
 <!-- フィルターバー -->
@@ -288,52 +357,115 @@ footer {
       <div class="h-main">獨協医科大学病院</div>
     </div>
     <div class="h-tel-box">
-      <span class="tel-line">外来予約：各診療科へ直接連絡</span>
-      <span class="tel-line"><a href="https://www.dokkyomed.ac.jp/hosp-m/outpatient/" target="_blank" class="detail-file-link">詳しくはこちら → 外来診療医一覧表</a></span>
+      <span class="tel-line"><span class="tel-label">代表</span> 0282-86-1111</span>
     </div>
   </div>
-  <div class="card-body">
-    <div class="row3">
-      <div class="sec s-rule">
-        <div class="sec-label">予約の基本ルール</div>
-        <div class="sec-content">受付時間：月〜土 8:00〜13:00（休診日除く）
-診療時間：月〜土 9:00〜16:30（休診日除く）
-専門外来は原則予約制
-※地域連携・患者サポートセンターでは予約受付を行っていません</div>
-      </div>
-      <div class="sec s-contact">
-        <div class="sec-label">予約方法と連絡先</div>
-        <div class="sec-content">事前予約の連絡や外来問い合わせは
-各診療科外来へお電話ください
-<a href="https://www.dokkyomed.ac.jp/hosp-m/outpatient/" target="_blank" class="detail-file-link">詳しくはこちら → 外来診療医一覧表</a>
-（代表：<strong>0282-86-1111</strong>）</div>
-      </div>
-      <div class="sec s-prepare">
-        <div class="sec-label">当院が準備するもの</div>
-        <div class="sec-content">診療情報提供書（紹介状）
-※紹介先の診療科名を必ず記載</div>
-      </div>
+  <div class="card-tabs">
+    <button class="ctab active" data-pane="dokkyo-gairai">外来予約</button>
+    <button class="ctab" data-pane="dokkyo-pet">PET検査予約</button>
+  </div>
+
+  <!-- 外来予約 -->
+  <div class="tab-pane active" id="dokkyo-gairai">
+    <div class="card-label">
+      <span class="label-main">予約する（電話）</span>
+      <span class="label-sub">｜ 公式：専門外来は予約制</span>
     </div>
-    <div class="row2">
-      <div class="sec s-patient">
-        <div class="sec-label">患者さんへの説明</div>
-        <div class="sec-content">外来受付時間内に初診受付カウンター①番へ
+    <div class="card-body">
+      <div class="row3">
+        <div class="sec s-method">
+          <div class="sec-label">予約方法</div>
+          <div class="sec-content">各診療科へ直接連絡
+（代表：<strong>0282-86-1111</strong>）
+連絡先・受付時間は外来診療医一覧表を参照
+<a href="https://www.dokkyomed.ac.jp/hosp-m/outpatient/" target="_blank" rel="noopener noreferrer" class="detail-file-link">外来診療医一覧表</a>
+※診療科により時間制限あり</div>
+        </div>
+        <div class="sec s-prepare">
+          <div class="sec-label">書類の準備</div>
+          <div class="sec-content">診療情報提供書
+（紹介先の診療科名を必ず記載）</div>
+        </div>
+        <div class="sec s-patient">
+          <div class="sec-label">患者への説明</div>
+          <div class="sec-content">外来受付時間内に
+<strong>初診受付カウンター①番</strong>へ
+持参物：
 ・紹介状
-・保険証（またはマイナンバーカード）
-を提出するよう案内</div>
+・保険証（またはマイナンバーカード）</div>
+        </div>
       </div>
-      <div class="sec s-note">
-        <div class="sec-label">備考</div>
-        <div class="sec-content">・電話・名刺のみの紹介は不可（選定療養費が発生）
-・医療連携部門の直通TEL/FAXは公式サイト非掲載
-・予約・問い合わせは各診療科が窓口</div>
+      <div class="row1">
+        <div class="sec s-note">
+          <div class="sec-label">備考</div>
+          <div class="sec-content">・電話・名刺のみの紹介は不可（選定療養費が発生）</div>
+        </div>
+      </div>
+      <div class="url-footer">
+        <span class="url-footer-label">🔗 情報源</span>
+        <a href="https://www.dokkyomed.ac.jp/hosp-m/medical-institution/guide.html" target="_blank" rel="noopener noreferrer">医療機関向け案内ページ</a>
+        <a href="https://dept.dokkyomed.ac.jp/dep-m/renkei/cooperation.html" target="_blank" rel="noopener noreferrer">地域連携情報</a>
+        <a href="https://www.dokkyomed.ac.jp/hosp-m/outpatient/" target="_blank" rel="noopener noreferrer" class="gairai-link">外来診療医一覧表</a>
       </div>
     </div>
-    <div class="url-footer">
-      <span class="url-footer-label">🔗 情報源</span>
-      <a href="https://www.dokkyomed.ac.jp/hosp-m/medical-institution/guide.html" target="_blank">医療機関向け案内ページ</a>
-      <a href="https://dept.dokkyomed.ac.jp/dep-m/renkei/cooperation.html" target="_blank">地域連携情報</a>
-      <a href="https://www.dokkyomed.ac.jp/hosp-m/outpatient/" target="_blank" class="gairai-link">外来診療医一覧表</a>
+  </div>
+
+  <!-- PET検査予約 -->
+  <div class="tab-pane" id="dokkyo-pet">
+    <div class="card-label">
+      <span class="label-main">予約する（電話）</span>
+      <span class="label-sub">｜ 公式：必須</span>
+    </div>
+    <div class="card-body">
+      <div class="row3">
+        <div class="sec s-method">
+          <div class="sec-label">予約方法</div>
+          <div class="sec-content">TEL <strong>0282-85-1166</strong>（PETセンター）
+FAX <strong>0282-85-1170</strong>
+月〜土 9:00〜16:30（第3土曜を除く）
+
+①PETセンターに電話で申込み
+②検査申込書（診療情報提供書）を
+　郵送またはFAXでPETセンターへ送付
+　→ 患者さんの同意を得た上で送付
+③PETセンターで予約日時を確定
+　→ 検査予約確認票がクリニックへ郵送</div>
+        </div>
+        <div class="sec s-prepare">
+          <div class="sec-label">書類の準備</div>
+          <div class="sec-content">診療情報提供書
+（検査申込書として使用）
+※過去の画像診断フィルム
+　（CT・MRI・US等）があれば患者へ渡す
+　→ 検査当日持参（検査後に返却）</div>
+        </div>
+        <div class="sec s-patient">
+          <div class="sec-label">患者への説明</div>
+          <div class="sec-content">検査予定日にPETセンターへ直接来院
+（<strong>本院受付は通らない</strong>）
+後日、PETセンターから患者宅へ直接書類が郵送される
+（予約確認票・検査概要・問診票等）
+持参物：過去の画像診断フィルム等（あれば）</div>
+        </div>
+      </div>
+      <div class="row2">
+        <div class="sec s-result">
+          <div class="sec-label">結果について</div>
+          <div class="sec-content">1週間以内に
+PETセンターからクリニックへ
+郵送または持参</div>
+        </div>
+        <div class="sec s-note">
+          <div class="sec-label">備考</div>
+          <div class="sec-content">・PETセンターは本院とは別の施設
+　（壬生町の本院敷地内）</div>
+        </div>
+      </div>
+      <div class="url-footer">
+        <span class="url-footer-label">🔗 情報源</span>
+        <a href="https://www.dokkyomed.ac.jp/hosp-m/examination/petct/institution/reservation.html" target="_blank" rel="noopener noreferrer">PETセンター医療機関向け予約情報</a>
+        <a href="https://www.dokkyomed.ac.jp/hosp-m/outpatient/" target="_blank" rel="noopener noreferrer" class="gairai-link">外来診療医一覧表</a>
+      </div>
     </div>
   </div>
 </div>
@@ -349,28 +481,75 @@ footer {
       <span class="tel-line"><span class="tel-label">TEL（検査予約）</span> 028-626-5674</span>
     </div>
   </div>
-  <div class="card-body">
-    <div class="row3">
-      <div class="sec s-rule">
-        <div class="sec-label">予約の基本ルール</div>
-        <div class="sec-content">事前連絡：<strong>必須</strong>
-受付時間：午前8時30分〜11時
-受付場所：総合受付① 初診受付へお越しください
-※診療科によって受付時間が異なる場合があります
-休診日：日曜・祝日・第２土曜・年末年始(12月29日〜1月3日)</div>
+  <div class="card-tabs">
+    <button class="ctab active" data-pane="saiseikai-gairai">外来予約</button>
+    <button class="ctab" data-pane="saiseikai-mri">MRI検査予約</button>
+  </div>
+
+  <!-- 外来予約 -->
+  <div class="tab-pane active" id="saiseikai-gairai">
+    <div class="card-label">
+      <span class="label-main">予約する（電話）</span>
+      <span class="label-sub">｜ 公式：任意</span>
+    </div>
+    <div class="card-body">
+      <div class="row3">
+        <div class="sec s-method">
+          <div class="sec-label">予約方法</div>
+          <div class="sec-content">TEL <strong>028-626-5595</strong>（地域連携課・直通）
+FAX 028-626-5795
+月〜金 9:00〜17:00 ／ 土 9:00〜12:00
+※日曜・祝日・第2土曜・年末年始(12/29〜1/3)除く
+診療科ごとの詳細はファイルを参照
+<a href="20260331_%E6%B8%88%E7%94%9F%E4%BC%9A%E5%90%84%E7%A8%AE%E6%A4%9C%E6%9F%BB%E3%81%AE%E3%81%93%E3%82%99%E6%A1%88%E5%86%85.pdf" target="_blank" rel="noopener noreferrer" class="detail-file-link">📄 詳細ファイル</a></div>
+        </div>
+        <div class="sec s-prepare">
+          <div class="sec-label">書類の準備</div>
+          <div class="sec-content">診療情報提供書</div>
+        </div>
+        <div class="sec s-patient">
+          <div class="sec-label">患者への説明</div>
+          <div class="sec-content">予約日時に外来受付へ
+持参物：
+・紹介状
+・予約票<span style="font-size:80%;">（外来でもFAX届くか電話時に確認）</span>
+・保険証</div>
+        </div>
       </div>
-      <div class="sec s-contact">
-        <div class="sec-label">予約方法と連絡先</div>
-        <div class="sec-content">地域連携課
-TEL（外来予約）: <strong>028-626-5595</strong>（直通）
-TEL（検査予約）: <strong>028-626-5674</strong>
-FAX: 028-626-5795
-代表: 028-626-5500（内線3137）
-<a href="20260331_%E6%B8%88%E7%94%9F%E4%BC%9A%E5%90%84%E7%A8%AE%E6%A4%9C%E6%9F%BB%E3%81%AE%E3%81%93%E3%82%99%E6%A1%88%E5%86%85.pdf" target="_blank" class="detail-file-link">📄 詳細はこのファイルへ</a></div>
+      <div class="row1">
+        <div class="sec s-note">
+          <div class="sec-label">備考</div>
+          <div class="sec-content">・紹介状なし初診：選定療養費 <strong>8,800円〜</strong></div>
+        </div>
       </div>
-      <div class="sec s-prepare">
-        <div class="sec-label">当院が準備するもの</div>
-        <div class="sec-content">診療情報提供書（紹介状）
+      <div class="url-footer">
+        <span class="url-footer-label">🔗 情報源</span>
+        <a href="https://www.saimiya.com/renkei/cooperation-doctor.html" target="_blank" rel="noopener noreferrer">医療機関向け連携情報</a>
+        <a href="https://www.saimiya.com/gairai/table-doc.html" target="_blank" rel="noopener noreferrer" class="gairai-link">外来診療医一覧表</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MRI検査予約 -->
+  <div class="tab-pane" id="saiseikai-mri">
+    <div class="card-label">
+      <span class="label-main">予約する（電話）</span>
+      <span class="label-sub">｜ 公式：必須</span>
+    </div>
+    <div class="card-body">
+      <div class="row3">
+        <div class="sec s-method">
+          <div class="sec-label">予約方法</div>
+          <div class="sec-content">TEL <strong>028-626-5674</strong>（地域連携課・検査予約）
+FAX 028-626-5795
+月〜金 9:00〜17:00 ／ 土 9:00〜12:00
+※日曜・祝日・第2土曜・年末年始(12/29〜1/3)除く
+MRIは月〜金のみ対応
+<a href="20260331_%E6%B8%88%E7%94%9F%E4%BC%9A%E5%90%84%E7%A8%AE%E6%A4%9C%E6%9F%BB%E3%81%AE%E3%81%93%E3%82%99%E6%A1%88%E5%86%85.pdf" target="_blank" rel="noopener noreferrer" class="detail-file-link">📄 詳細ファイル</a></div>
+        </div>
+        <div class="sec s-prepare">
+          <div class="sec-label">書類の準備</div>
+          <div class="sec-content">電話予約後、以下3枚がFAXで届くので記入・準備：
 <span style="font-size:80%;">【MRI依頼の流れ】
 ①電話で予約
 　すぐに以下3枚がFAXで届く
@@ -378,31 +557,37 @@ FAX: 028-626-5795
 　・予約票
 　・造影剤同意書
 ②必要事項を先生に記入してもらう
-③診療情報提供書は封をして、
-　その他用紙と一緒に患者さんへ説明・お渡し</span></div>
-      </div>
-    </div>
-    <div class="row2">
-      <div class="sec s-patient">
-        <div class="sec-label">患者さんへの説明</div>
-        <div class="sec-content">予約日時に外来受付へ
+③診療情報提供書は封をする、その他は手渡し</span></div>
+        </div>
+        <div class="sec s-patient">
+          <div class="sec-label">患者への説明</div>
+          <div class="sec-content">予約時間の<strong>30分前</strong>に総合受付①へ
+持参物：
 ・紹介状
 ・予約票
+・同意書
 ・保険証
-を持参するよう案内</div>
+食事については電話予約時に病院から指示あり</div>
+        </div>
       </div>
-      <div class="sec s-note">
-        <div class="sec-label">備考</div>
-        <div class="sec-content">・紹介受診重点医療機関（2023年7月指定）
-・紹介状なし初診：選定療養費 <strong>8,800円〜</strong>
-・検査専用予約枠あり
-　（PET/CT・CT・MRI・内視鏡・RI・超音波）</div>
+      <div class="row2">
+        <div class="sec s-result">
+          <div class="sec-label">結果について</div>
+          <div class="sec-content">5日以内（土日祝除く）に郵送
+※急ぎの場合は予約時に申し出</div>
+        </div>
+        <div class="sec s-note">
+          <div class="sec-label">備考</div>
+          <div class="sec-content">・対応検査：MR・CT・PET/CT・RI・内視鏡・超音波
+・MR以外を依頼する場合は検査別パンフレット要確認
+・キャンセル：前日正午まで</div>
+        </div>
       </div>
-    </div>
-    <div class="url-footer">
-      <span class="url-footer-label">🔗 情報源</span>
-      <a href="https://www.saimiya.com/renkei/cooperation-doctor.html" target="_blank">医療機関向け連携情報</a>
-      <a href="https://www.saimiya.com/gairai/table-doc.html" target="_blank" class="gairai-link">外来診療医一覧表</a>
+      <div class="url-footer">
+        <span class="url-footer-label">🔗 情報源</span>
+        <a href="https://www.saimiya.com/renkei/cooperation-doctor.html" target="_blank" rel="noopener noreferrer">医療機関向け連携情報</a>
+        <a href="https://www.saimiya.com/gairai/table-doc.html" target="_blank" rel="noopener noreferrer" class="gairai-link">外来診療医一覧表</a>
+      </div>
     </div>
   </div>
 </div>
@@ -415,52 +600,106 @@ FAX: 028-626-5795
       <div class="h-sub">（NHO宇都宮病院）</div>
     </div>
     <div class="h-tel-box">
-      <span class="tel-line"><span class="tel-label">TEL（連携医・検査予約）</span> 028-673-9132</span>
+      <span class="tel-line"><span class="tel-label">TEL（連携室）</span> 028-673-9132</span>
     </div>
   </div>
-  <div class="card-body">
-    <div class="row3">
-      <div class="sec s-rule">
-        <div class="sec-label">予約の基本ルール</div>
-        <div class="sec-content">事前連絡：<strong>任意</strong>
-予約は可能だが、詳しい記載なし</div>
+  <div class="card-tabs">
+    <button class="ctab active" data-pane="nho-u-gairai">外来予約</button>
+    <button class="ctab" data-pane="nho-u-mri">MRI検査予約</button>
+  </div>
+
+  <!-- 外来予約 -->
+  <div class="tab-pane active" id="nho-u-gairai">
+    <div class="card-label">
+      <span class="label-main">予約する（電話）</span>
+      <span class="label-sub">｜ 公式：任意</span>
+    </div>
+    <div class="card-body">
+      <div class="row3">
+        <div class="sec s-method">
+          <div class="sec-label">予約方法</div>
+          <div class="sec-content">TEL <strong>028-673-9132</strong>（地域医療連携室）
+FAX 028-673-1961（直通）</div>
+        </div>
+        <div class="sec s-prepare">
+          <div class="sec-label">書類の準備</div>
+          <div class="sec-content">診療情報提供書</div>
+        </div>
+        <div class="sec s-patient">
+          <div class="sec-label">患者への説明</div>
+          <div class="sec-content">初診受付 8:30〜11:00
+持参物：
+・紹介状
+・保険証</div>
+        </div>
       </div>
-      <div class="sec s-contact">
-        <div class="sec-label">予約方法と連絡先</div>
-        <div class="sec-content">地域医療連携室
-【連携医・ダイレクト検査予約】
-TEL: <strong>028-673-9132</strong>
-【MSW・医療相談】
-TEL: 028-673-2374
-【FAX】
-FAX: 028-673-1961（直通）</div>
+      <div class="row1">
+        <div class="sec s-note">
+          <div class="sec-label">備考</div>
+          <div class="sec-content">・高額医療機器共同利用可（MRI・内視鏡等）</div>
+        </div>
       </div>
-      <div class="sec s-prepare">
-        <div class="sec-label">当院が準備するもの</div>
-        <div class="sec-content">診療情報提供書（紹介状）</div>
+      <div class="url-footer">
+        <span class="url-footer-label">🔗 情報源</span>
+        <a href="https://utsunomiya.hosp.go.jp/profession/cnt1_00014.html" target="_blank" rel="noopener noreferrer">医療機関向け連携情報</a>
+        <a href="https://utsunomiya.hosp.go.jp/outpatient/cnt1_00010.html" target="_blank" rel="noopener noreferrer" class="gairai-link">外来診療医一覧表</a>
       </div>
     </div>
-    <div class="row2">
-      <div class="sec s-patient">
-        <div class="sec-label">患者さんへの説明</div>
-        <div class="sec-content">予約日時に初診受付へ
-・紹介状
+  </div>
+
+  <!-- MRI検査予約 -->
+  <div class="tab-pane" id="nho-u-mri">
+    <div class="card-label">
+      <span class="label-main">予約する（電話）</span>
+      <span class="label-sub">｜ 公式：必須</span>
+    </div>
+    <div class="card-body">
+      <div class="row3">
+        <div class="sec s-method">
+          <div class="sec-label">予約方法</div>
+          <div class="sec-content">TEL <strong>028-673-9132</strong>（地域医療連携室・検査予約）
+FAX 028-673-1961（直通）</div>
+        </div>
+        <div class="sec s-prepare">
+          <div class="sec-label">書類の準備</div>
+          <div class="sec-content">指定の依頼票・予約票を印刷し、説明のうえ患者へ渡す
+・依頼票：FAXで病院へ送信し、原本は封筒に入れて患者へ
+・予約票：そのまま患者へ
+<span style="font-size:80%;">【指定書式の保存場所】
+デジカル患者カルテ→ファイル→文書雛形
+→NHO宇都宮病院検査（予約票）
+→NHO宇都宮病院検査（依頼票）</span></div>
+        </div>
+        <div class="sec s-patient">
+          <div class="sec-label">患者への説明</div>
+          <div class="sec-content">持参物：
+・依頼票（封筒入り）
 ・予約票
 ・保険証
-を持参するよう案内</div>
+食事については電話予約時に病院から指示あり</div>
+        </div>
       </div>
-      <div class="sec s-note">
-        <div class="sec-label">備考</div>
-        <div class="sec-content">・TEL 028-673-2374 はMSW（医療相談部門）の番号
-　患者紹介・検査予約は <strong>028-673-9132</strong> へ
-・MRI・内視鏡等の高額医療機器共同利用可
-・初診は 8:30〜11:00 受付</div>
+      <div class="row2">
+        <div class="sec s-result">
+          <div class="sec-label">結果について</div>
+          <div class="sec-content">・1〜2週間で郵送（読影医は週1日のため）
+・急ぎの場合：読影後にFAX対応可
+　→ 連携室へTELで依頼
+・患者さんは検査当日そのまま帰宅
+　（結果・CD-R等は渡されない）
+・CTも同じ流れ</div>
+        </div>
+        <div class="sec s-note">
+          <div class="sec-label">備考</div>
+          <div class="sec-content">・高額医療機器共同利用可
+・他の対応検査：内視鏡等</div>
+        </div>
       </div>
-    </div>
-    <div class="url-footer">
-      <span class="url-footer-label">🔗 情報源</span>
-      <a href="https://utsunomiya.hosp.go.jp/profession/cnt1_00014.html" target="_blank">医療機関向け連携情報</a>
-      <a href="https://utsunomiya.hosp.go.jp/outpatient/cnt1_00010.html" target="_blank" class="gairai-link">外来診療医一覧表</a>
+      <div class="url-footer">
+        <span class="url-footer-label">🔗 情報源</span>
+        <a href="https://utsunomiya.hosp.go.jp/profession/cnt1_00014.html" target="_blank" rel="noopener noreferrer">医療機関向け連携情報</a>
+        <a href="https://utsunomiya.hosp.go.jp/outpatient/cnt1_00010.html" target="_blank" rel="noopener noreferrer" class="gairai-link">外来診療医一覧表</a>
+      </div>
     </div>
   </div>
 </div>
@@ -470,50 +709,47 @@ FAX: 028-673-1961（直通）</div>
   <div class="card-head">
     <div>
       <div class="h-main">医療法人社団晃陽会 宇都宮第一病院</div>
-      <div class="h-sub">（第一病院）</div>
     </div>
     <div class="h-tel-box">
       <span class="tel-line"><span class="tel-label">TEL（地域連携室）</span> 028-665-2101</span>
     </div>
   </div>
+  <div class="card-label">
+    <span class="label-main">予約する（電話 or LINE）</span>
+    <span class="label-sub">｜ 公式：任意</span>
+  </div>
   <div class="card-body">
     <div class="row3">
-      <div class="sec s-rule">
-        <div class="sec-label">予約の基本ルール</div>
-        <div class="sec-content">事前連絡：<strong>任意</strong>
-予約希望の場合：<strong>LINEまたは電話</strong>で受付</div>
-      </div>
-      <div class="sec s-contact">
-        <div class="sec-label">予約方法と連絡先</div>
-        <div class="sec-content">地域医療連携室
-TEL: <strong>028-665-2101</strong>
-FAX: 028-666-7504
-代表: 028-665-5111</div>
+      <div class="sec s-method">
+        <div class="sec-label">予約方法</div>
+        <div class="sec-content">TEL <strong>028-665-2101</strong>（地域医療連携室）
+FAX 028-666-7504
+<a href="https://www.kouyoukai-hp.jp/outpatient/#syoshin" target="_blank" rel="noopener noreferrer" class="inline-link">LINE予約はこちら</a>
+※代表：028-665-5111</div>
       </div>
       <div class="sec s-prepare">
-        <div class="sec-label">当院が準備するもの</div>
-        <div class="sec-content">診療情報提供書（紹介状）</div>
+        <div class="sec-label">書類の準備</div>
+        <div class="sec-content">診療情報提供書</div>
+      </div>
+      <div class="sec s-patient">
+        <div class="sec-label">患者への説明</div>
+        <div class="sec-content">予約日時に外来受付へ
+持参物：
+・紹介状
+・保険証</div>
       </div>
     </div>
-    <div class="row2">
-      <div class="sec s-patient">
-        <div class="sec-label">患者さんへの説明</div>
-        <div class="sec-content">予約日時に外来受付へ
-・紹介状
-・保険証
-を持参するよう案内</div>
-      </div>
+    <div class="row1">
       <div class="sec s-note">
         <div class="sec-label">備考</div>
-        <div class="sec-content">・レスパイト入院の受け入れあり
-　（申込は原則入院希望5日前まで）</div>
+        <div class="sec-content">・レスパイト入院の受け入れあり（原則入院希望5日前まで申込）</div>
       </div>
     </div>
     <div class="url-footer">
       <span class="url-footer-label">🔗 情報源</span>
-      <a href="https://www.kouyoukai-hp.jp/community-health/" target="_blank">地域医療連携</a>
-      <a href="https://www.kouyoukai-hp.jp/" target="_blank">ホームページ</a>
-      <a href="https://www.kouyoukai-hp.jp/outpatient/#syoshin" target="_blank" class="gairai-link">外来診療医一覧表 / LINEで予約</a>
+      <a href="https://www.kouyoukai-hp.jp/community-health/" target="_blank" rel="noopener noreferrer">地域医療連携</a>
+      <a href="https://www.kouyoukai-hp.jp/" target="_blank" rel="noopener noreferrer">ホームページ</a>
+      <a href="https://www.kouyoukai-hp.jp/outpatient/#syoshin" target="_blank" rel="noopener noreferrer" class="gairai-link">外来診療医一覧表 / LINEで予約</a>
     </div>
   </div>
 </div>
@@ -525,61 +761,53 @@ FAX: 028-666-7504
       <div class="h-main">自治医科大学附属病院</div>
     </div>
     <div class="h-tel-box">
-      <span class="tel-line"><span class="tel-label">FAX（予約専用）</span> 0285-44-5397</span>
-      <span class="tel-line" style="margin-top:2px"><span class="tel-label">TEL（変更・相談）</span> 0285-58-7109</span>
+      <span class="tel-line"><span class="tel-label">FAX（予約）</span> 0285-44-5397</span>
     </div>
+  </div>
+  <div class="card-label">
+    <span class="label-main">予約する（FAX）</span>
+    <span class="label-sub">｜ 公式：必須（FAX予約のみ）</span>
   </div>
   <div class="card-body">
     <div class="row3">
-      <div class="sec s-rule">
-        <div class="sec-label">予約の基本ルール</div>
-        <div class="sec-content">事前連絡：<strong>必須</strong>
-（FAX予約が基本。
-当日予約・時間予約は不可）
-FAX受付：月〜金 9:00〜15:00（休診日除く）
-<a href="https://www.jichi.ac.jp/hospital/top/tiiki/gyoumu/byoshin/index.html" target="_blank" class="detail-file-link">詳しくはこちら →</a></div>
-      </div>
-      <div class="sec s-contact">
-        <div class="sec-label">予約方法と連絡先</div>
-        <div class="sec-content">地域医療連携室
-【FAX予約（申込書＋紹介状を同時送付）】
-FAX: <strong>0285-44-5397</strong>
-【変更・取消・相談（どちらでも可）】
-TEL: <strong>0285-58-7109</strong>（直通）
-TEL: <strong>0285-58-7463</strong>（直通）
+      <div class="sec s-method">
+        <div class="sec-label">予約方法</div>
+        <div class="sec-content">FAX <strong>0285-44-5397</strong>
+（FAX予約申込書＋診療情報提供書を同時送付）
+月〜金 9:00〜15:00（休診日除く）
+
+変更・取消・相談：
+TEL <strong>0285-58-7109 ／ 0285-58-7463</strong>
 e-mail: byoushin@jichi.ac.jp</div>
       </div>
       <div class="sec s-prepare">
-        <div class="sec-label">当院が準備するもの</div>
-        <div class="sec-content">・診療情報提供書（紹介状）
+        <div class="sec-label">書類の準備</div>
+        <div class="sec-content">・診療情報提供書
 ・FAX診療予約申込書
-　（紹介状と合わせてFAX送信）</div>
+（診療情報提供書と同時にFAX送付）</div>
+      </div>
+      <div class="sec s-patient">
+        <div class="sec-label">患者への説明</div>
+        <div class="sec-content">受付時間 8:30〜11:00
+医事課「FAX紹介状提示窓口」へ提示
+（初診受付ではない）
+持参物：
+・紹介状
+・FAX診療予約票
+・マイナンバーカード（または資格確認書）</div>
       </div>
     </div>
-    <div class="row2">
-      <div class="sec s-patient">
-        <div class="sec-label">患者さんへの説明</div>
-        <div class="sec-content">受付時間 8:30〜11:00
-・紹介状
-・FAXによる診療予約票
-・マイナンバーカード（または資格確認書）
-を持参のうえ、医事課
-「FAX紹介状提示窓口」へ提示
-（初診受付ではないので注意）</div>
-      </div>
+    <div class="row1">
       <div class="sec s-note">
         <div class="sec-label">備考</div>
         <div class="sec-content">・当日予約・時間予約は不可
-・直接予約できない科あり
-　（緩和ケア科・臨床腫瘍科）
-・紹介状なし初診：選定療養費が発生
 ・予約変更・取消は必ず紹介元から連絡</div>
       </div>
     </div>
     <div class="url-footer">
       <span class="url-footer-label">🔗 情報源</span>
-      <a href="https://www.jichi.ac.jp/hospital/top/tiiki/gyoumu/byoshin/index.html" target="_blank">医療機関向け連携情報</a>
-      <a href="https://www.jichi.ac.jp/hospital/top/outpatient/list.html" target="_blank" class="gairai-link">外来診療医一覧表</a>
+      <a href="https://www.jichi.ac.jp/hospital/top/tiiki/gyoumu/byoshin/index.html" target="_blank" rel="noopener noreferrer">医療機関向け連携情報</a>
+      <a href="https://www.jichi.ac.jp/hospital/top/outpatient/list.html" target="_blank" rel="noopener noreferrer" class="gairai-link">外来診療医一覧表</a>
     </div>
   </div>
 </div>
@@ -595,47 +823,44 @@ e-mail: byoushin@jichi.ac.jp</div>
       <span class="tel-line"><span class="tel-label">TEL（地域連携室）</span> 028-655-1161</span>
     </div>
   </div>
+  <div class="card-label">
+    <span class="label-main">予約する（電話）</span>
+    <span class="label-sub">｜ 公式：予約優先</span>
+  </div>
   <div class="card-body">
     <div class="row3">
-      <div class="sec s-rule">
-        <div class="sec-label">予約の基本ルール</div>
-        <div class="sec-content">事前連絡：<strong>必須ではないが予約優先</strong></div>
-      </div>
-      <div class="sec s-contact">
-        <div class="sec-label">予約方法と連絡先</div>
-        <div class="sec-content">地域連携室
-TEL: <strong>028-655-1161</strong>
-FAX: 028-655-1167
-代表: 028-653-1001</div>
+      <div class="sec s-method">
+        <div class="sec-label">予約方法</div>
+        <div class="sec-content">TEL <strong>028-655-1161</strong>（地域連携室）
+FAX 028-655-1167
+※代表：028-653-1001</div>
       </div>
       <div class="sec s-prepare">
-        <div class="sec-label">当院が準備するもの</div>
-        <div class="sec-content">診療情報提供書（紹介状）
-または当院専用紹介状
-（専用紹介状はURLページ下部からDL可）</div>
+        <div class="sec-label">書類の準備</div>
+        <div class="sec-content">診療情報提供書 または 当院専用紹介状
+（<a href="https://utsunomiya.jcho.go.jp/medical-personnel/cooperation/%E5%8C%BB%E7%99%82%E9%96%A2%E4%BF%82%E3%81%AE%E7%9A%86%E6%A7%98%E3%81%B8/" target="_blank" rel="noopener noreferrer" class="inline-link">専用紹介状は病院サイト下部からDL可</a>）</div>
+      </div>
+      <div class="sec s-patient">
+        <div class="sec-label">患者への説明</div>
+        <div class="sec-content">予約日時に外来受付へ
+持参物：
+・紹介状（または専用紹介状②〜④枚目）
+・保険証</div>
       </div>
     </div>
-    <div class="row2">
-      <div class="sec s-patient">
-        <div class="sec-label">患者さんへの説明</div>
-        <div class="sec-content">予約日時に外来受付へ
-・紹介状（または専用紹介状②〜④枚目）
-・保険証
-を持参するよう案内
-→地域連携室経由の患者は優先診察</div>
-      </div>
+    <div class="row1">
       <div class="sec s-note">
         <div class="sec-label">備考</div>
-        <div class="sec-content">・専用紹介状あり（Excel4枚組・PDF2枚組）
-　①クリニック控え ②当院宛紹介状
-　③連携室宛 ④患者案内表
-　患者には②〜④を渡す</div>
+        <div class="sec-content">・地域連携室経由の患者は優先診察
+・専用紹介状の構成：
+　①クリニック控え ②当院宛紹介状 ③連携室宛 ④患者案内表
+　→ 患者には②〜④を渡す</div>
       </div>
     </div>
     <div class="url-footer">
       <span class="url-footer-label">🔗 情報源</span>
-      <a href="https://utsunomiya.jcho.go.jp/medical-personnel/cooperation/%E5%8C%BB%E7%99%82%E9%96%A2%E4%BF%82%E3%81%AE%E7%9A%86%E6%A7%98%E3%81%B8/" target="_blank">医療機関向け連携情報</a>
-      <a href="https://utsunomiya.jcho.go.jp/patient/outpatient/" target="_blank" class="gairai-link">外来診療医一覧表</a>
+      <a href="https://utsunomiya.jcho.go.jp/medical-personnel/cooperation/%E5%8C%BB%E7%99%82%E9%96%A2%E4%BF%82%E3%81%AE%E7%9A%86%E6%A7%98%E3%81%B8/" target="_blank" rel="noopener noreferrer">医療機関向け連携情報</a>
+      <a href="https://utsunomiya.jcho.go.jp/patient/outpatient/" target="_blank" rel="noopener noreferrer" class="gairai-link">外来診療医一覧表</a>
     </div>
   </div>
 </div>
@@ -645,65 +870,117 @@ FAX: 028-655-1167
   <div class="card-head">
     <div>
       <div class="h-main">地方独立行政法人 栃木県立がんセンター</div>
-      <div class="h-sub">（がんセンター）</div>
     </div>
     <div class="h-tel-box">
       <span class="tel-line"><span class="tel-label">TEL（予約センター）</span> 028-658-5012</span>
     </div>
   </div>
-  <div class="card-body">
-    <div class="row3">
-      <div class="sec s-rule">
-        <div class="sec-label">予約の基本ルール</div>
-        <div class="sec-content">事前連絡：<strong>必須</strong>
-初回受診は紹介予約制
-受付時間：月〜金 8:30〜16:30</div>
-      </div>
-      <div class="sec s-contact">
-        <div class="sec-label">予約方法と連絡先</div>
-        <div class="sec-content">【患者紹介の予約】
-予約センター TEL: <strong>028-658-5012</strong>
-（平日 8:30〜16:30）
+  <div class="card-tabs">
+    <button class="ctab active" data-pane="cancer-gairai">外来予約</button>
+    <button class="ctab" data-pane="cancer-mri">MRI検査予約</button>
+  </div>
 
-【先生方・事務担当の相談等】
-地域連携チーム
-TEL: 028-611-5503（直通）
-FAX: 028-611-5499（直通）</div>
-      </div>
-      <div class="sec s-prepare">
-        <div class="sec-label">当院が準備するもの</div>
-        <div class="sec-content">診療情報提供書（紹介状）
-（書式は病院サイトからDL可）</div>
-      </div>
+  <!-- 外来予約 -->
+  <div class="tab-pane active" id="cancer-gairai">
+    <div class="card-label">
+      <span class="label-main">予約する（電話）</span>
+      <span class="label-sub">｜ 公式：必須</span>
     </div>
-    <div class="row2">
-      <div class="sec s-patient">
-        <div class="sec-label">患者さんへの説明</div>
-        <div class="sec-content">予約日時に受診するよう案内
-受託検査の場合：
-・患者さん用予約票（当院からFAXで送付）
+    <div class="card-body">
+      <div class="row3">
+        <div class="sec s-method">
+          <div class="sec-label">予約方法</div>
+          <div class="sec-content">TEL <strong>028-658-5012</strong>（予約センター）
+月〜金 8:30〜16:30
+※医師への直接相談：代表 028-658-5151</div>
+        </div>
+        <div class="sec s-prepare">
+          <div class="sec-label">書類の準備</div>
+          <div class="sec-content">診療情報提供書</div>
+        </div>
+        <div class="sec s-patient">
+          <div class="sec-label">患者への説明</div>
+          <div class="sec-content">予約日時に受診
+持参物：
 ・紹介状
-を持参するよう案内</div>
+・保険証</div>
+        </div>
       </div>
-      <div class="sec s-note">
-        <div class="sec-label">備考</div>
-        <div class="sec-content">・がん専門病院
-・受託検査も受け付け
-　（CT・MRI・骨密度・超音波等）
-・検査結果はCD-Rで翌日発送
-・医師への直接相談は代表
-　TEL: 028-658-5151</div>
+      <div class="row1">
+        <div class="sec s-note">
+          <div class="sec-label">備考</div>
+          <div class="sec-content">（特記事項なし）</div>
+        </div>
+      </div>
+      <div class="url-footer">
+        <span class="url-footer-label">🔗 情報源</span>
+        <a href="https://www.tochigi-cc.jp/department/14.html" target="_blank" rel="noopener noreferrer">医療機関向け連携情報</a>
+        <a href="https://www.tochigi-cc.jp/schedule/index.html" target="_blank" rel="noopener noreferrer" class="gairai-link">外来診療医一覧表</a>
       </div>
     </div>
-    <div class="url-footer">
-      <span class="url-footer-label">🔗 情報源</span>
-      <a href="https://www.tochigi-cc.jp/department/14.html" target="_blank">医療機関向け連携情報</a>
-      <a href="https://www.tochigi-cc.jp/schedule/index.html" target="_blank" class="gairai-link">外来診療医一覧表</a>
+  </div>
+
+  <!-- MRI検査予約 -->
+  <div class="tab-pane" id="cancer-mri">
+    <div class="card-label">
+      <span class="label-main">予約する（電話 or FAX）</span>
+      <span class="label-sub">｜ 公式：必須</span>
+    </div>
+    <div class="card-body">
+      <div class="row3">
+        <div class="sec s-method">
+          <div class="sec-label">予約方法</div>
+          <div class="sec-content">TEL <strong>028-611-5503</strong>（地域連携チーム・直通）
+FAX <strong>028-611-5499</strong>
+月〜金 9:00〜16:30
+
+①電話 or 「紹介状及び検査依頼状」をFAXで申込み
+　→ FAXの場合、折り返し電話連絡あり
+②地域連携チームから「患者さん用予約票」がFAXで届く
+③予約票を患者へ渡す</div>
+        </div>
+        <div class="sec s-prepare">
+          <div class="sec-label">書類の準備</div>
+          <div class="sec-content">がんセンター専用書式：
+・紹介状及び検査依頼状
+・患者さん用予約票（病院からFAXで届く）
+<a href="https://www.tochigi-cc.jp/department/14.html" target="_blank" rel="noopener noreferrer" class="detail-file-link">書式ダウンロードはこちら</a></div>
+        </div>
+        <div class="sec s-patient">
+          <div class="sec-label">患者への説明</div>
+          <div class="sec-content">予約日時にがんセンターで検査
+検査終了後は帰宅
+持参物：
+・紹介状
+・予約票
+・保険証</div>
+        </div>
+      </div>
+      <div class="row2">
+        <div class="sec s-result">
+          <div class="sec-label">結果について</div>
+          <div class="sec-content">検査翌日（土日祝明けの始業日）に発送：
+・検査報告書
+・画像データ（CD-R）
+※金曜検査や実施時間によっては遅れる可能性あり</div>
+        </div>
+        <div class="sec s-note">
+          <div class="sec-label">備考</div>
+          <div class="sec-content">造影CT・造影MRI・MRIの注意点
+（血清クレアチニン値・喘息既往・体内留置物等）は
+<a href="https://www.tochigi-cc.jp/department/14.html" target="_blank" rel="noopener noreferrer" class="inline-link">病院サイト参照</a></div>
+        </div>
+      </div>
+      <div class="url-footer">
+        <span class="url-footer-label">🔗 情報源</span>
+        <a href="https://www.tochigi-cc.jp/department/14.html" target="_blank" rel="noopener noreferrer">医療機関向け連携情報・書式DL</a>
+        <a href="https://www.tochigi-cc.jp/schedule/index.html" target="_blank" rel="noopener noreferrer" class="gairai-link">外来診療医一覧表</a>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- ━━━ ⑧ 栃木医療センター ━━━ -->
+<!-- ━━━ ⑧ NHO栃木医療センター ━━━ -->
 <div class="card" data-hospital="nho-t" style="--hcolor:#1A5C3E">
   <div class="card-head">
     <div>
@@ -714,52 +991,46 @@ FAX: 028-611-5499（直通）</div>
       <span class="tel-line"><span class="tel-label">TEL（地域連携室直通）</span> 028-622-0299</span>
     </div>
   </div>
+  <div class="card-label">
+    <span class="label-main">予約する（電話）</span>
+    <span class="label-sub">｜ 公式：必須</span>
+  </div>
   <div class="card-body">
     <div class="row3">
-      <div class="sec s-rule">
-        <div class="sec-label">予約の基本ルール</div>
-        <div class="sec-content">事前連絡：<strong>必須</strong>
-受付時間：平日 8:30〜17:00</div>
-      </div>
-      <div class="sec s-contact">
-        <div class="sec-label">予約方法と連絡先</div>
-        <div class="sec-content">地域医療連携室
-TEL: <strong>028-622-0299</strong>（直通）
-FAX: 028-622-5298（直通）
-代表: 028-622-5241（内線3287）
-
-【患者さんからの直接予約】
-予約センター TEL: 028-622-5560</div>
+      <div class="sec s-method">
+        <div class="sec-label">予約方法</div>
+        <div class="sec-content">TEL <strong>028-622-0299</strong>（地域医療連携室・直通）
+FAX 028-622-5298（直通）
+平日 8:30〜17:00
+※代表：028-622-5241（内線3287）</div>
       </div>
       <div class="sec s-prepare">
-        <div class="sec-label">当院が準備するもの</div>
-        <div class="sec-content">診療情報提供書（紹介状）</div>
+        <div class="sec-label">書類の準備</div>
+        <div class="sec-content">診療情報提供書</div>
+      </div>
+      <div class="sec s-patient">
+        <div class="sec-label">患者への説明</div>
+        <div class="sec-content">初診受付 8:30〜11:00
+1番初診窓口前で診察申込書を記入後、
+1番初診受付へ提出
+持参物：
+・紹介状
+・マイナンバーカード（またはマイナ保険証）</div>
       </div>
     </div>
-    <div class="row2">
-      <div class="sec s-patient">
-        <div class="sec-label">患者さんへの説明</div>
-        <div class="sec-content">初診受付 8:30〜11:00
-外来棟玄関右・1番初診窓口前で
-診察申込書を記入後、
-・マイナンバーカード（またはマイナ保険証）
-・紹介状
-を1番初診受付へ提出するよう案内</div>
-      </div>
+    <div class="row1">
       <div class="sec s-note">
         <div class="sec-label">備考</div>
-        <div class="sec-content">・紹介状なし初診：選定療養費
-　初診 <strong>8,800円</strong>（令和8年1月5日より）
-　再診 3,300円
+        <div class="sec-content">・紹介状なし初診：選定療養費 <strong>8,800円</strong>、再診 3,300円
 ・大型機器共同利用可（要登録・無料）
-　CT・MRI・内視鏡・心エコー等
-　オンライン予約システムあり（24時間申込可）</div>
+　対応検査：CT（単純・造影）、MRI（単純・造影）、内視鏡（上部・下部）、心エコー
+・患者さんからの直接予約：028-622-5560（予約センター）</div>
       </div>
     </div>
     <div class="url-footer">
       <span class="url-footer-label">🔗 情報源</span>
-      <a href="https://tochigi.hosp.go.jp/medical_institution/chiiki_iryou_renkei.html" target="_blank">医療機関向け連携情報</a>
-      <a href="https://tochigi.hosp.go.jp/gairai/pdf/tantou.pdf" target="_blank" class="gairai-link">外来診療医一覧表</a>
+      <a href="https://tochigi.hosp.go.jp/medical_institution/chiiki_iryou_renkei.html" target="_blank" rel="noopener noreferrer">医療機関向け連携情報</a>
+      <a href="https://tochigi.hosp.go.jp/gairai/pdf/tantou.pdf" target="_blank" rel="noopener noreferrer" class="gairai-link">外来診療医一覧表</a>
     </div>
   </div>
 </div>
@@ -775,48 +1046,58 @@ FAX: 028-622-5298（直通）
       <span class="tel-line"><span class="tel-label">TEL（CT/MRI予約）</span> 028-657-7303</span>
     </div>
   </div>
+  <div class="card-label">
+    <span class="label-main">予約する（電話）</span>
+    <span class="label-sub">｜ 公式：必須</span>
+  </div>
   <div class="card-body">
     <div class="row3">
-      <div class="sec s-rule">
-        <div class="sec-label">予約の基本ルール</div>
-        <div class="sec-content">利用目的：当院では<strong>MRI</strong>
-事前予約：<strong>電話で予約（必須）</strong>
-　　　　　患者さんご本人でも予約可
-受付時間：月〜土 最終17:30
-　　　　　日・祝休（第1日曜のみ対応）</div>
-      </div>
-      <div class="sec s-contact">
-        <div class="sec-label">予約方法と連絡先</div>
-        <div class="sec-content">CT/MRI予約：<strong>028-657-7303</strong>
-PET予約　：<strong>028-657-7306</strong>
-代表　　　：028-657-7300
-FAX　　　：028-657-7301</div>
+      <div class="sec s-method">
+        <div class="sec-label">予約方法</div>
+        <div class="sec-content">TEL <strong>028-657-7303</strong>（CT/MRI予約）
+月〜土 最終17:30 ／ 日・祝休（第1日曜のみ対応）
+代表 028-657-7300 ／ FAX 028-657-7301
+※患者本人でも予約可</div>
       </div>
       <div class="sec s-prepare">
-        <div class="sec-label">当院が準備するもの</div>
-        <div class="sec-content">指定の診療情報提供書
-指定の説明書・問診票を印刷して、説明しお渡し
-<span style="font-size:12px;">指定用紙の保存場所：デジカル患者カルテ→ファイル→文書雛形→セントラル(問診票)・セントラル(説明書)</span></div>
+        <div class="sec-label">書類の準備</div>
+        <div class="sec-content">指定の診療情報提供書・説明書・問診票を印刷し、説明のうえ患者へ渡す
+・診療情報提供書：封筒に入れて患者へ
+・説明書・問診票：そのまま手渡し
+<span style="font-size:80%;">【指定書式の保存場所】
+デジカル患者カルテ→ファイル→文書雛形
+→セントラル（紹介状）
+→セントラル（説明書）
+→セントラル（問診票）</span></div>
+      </div>
+      <div class="sec s-patient">
+        <div class="sec-label">患者への説明</div>
+        <div class="sec-content">予約時間の<strong>20分前</strong>に受付へ
+食事については電話予約時に病院から指示あり
+持参物：
+・診療情報提供書（封筒入り）
+・説明書
+・問診票
+・保険証
+送迎希望の場合は電話予約時に相談</div>
       </div>
     </div>
     <div class="row2">
-      <div class="sec s-patient">
-        <div class="sec-label">患者さんへの説明</div>
-        <div class="sec-content">予約時間の<strong>20分前</strong>に受付へ
-CT/MRIの場合、検査<strong>6時間前</strong>から絶食
-（水・お茶は可）</div>
+      <div class="sec s-result">
+        <div class="sec-label">結果について</div>
+        <div class="sec-content">CD-R：検査当日その場で患者に渡す
+報告書：FAXで当院に届く
+（3日以内、土日挟むと5日）</div>
       </div>
       <div class="sec s-note">
         <div class="sec-label">備考</div>
-        <div class="sec-content">結果：CD-Rをその場でお渡し
-　　　→ FAXで当院に届く（3日以内、土日挟むと5日）
-・送迎可能（電話予約時に相談）
+        <div class="sec-content">・PET予約の場合：028-657-7306
 ・住所：栃木県宇都宮市屋板町561-3</div>
       </div>
     </div>
     <div class="url-footer">
       <span class="url-footer-label">🔗 情報源</span>
-      <a href="https://ucc.or.jp/" target="_blank">公式サイト</a>
+      <a href="https://ucc.or.jp/" target="_blank" rel="noopener noreferrer">公式サイト</a>
     </div>
   </div>
 </div>
@@ -824,10 +1105,11 @@ CT/MRIの場合、検査<strong>6時間前</strong>から絶食
 </main>
 
 <footer>
-  ※ 各病院公式サイトをもとに確認・作成（2026年3月）。変更の可能性があるため最新情報は各病院地域連携室へ直接ご確認ください。
+  ※ 各病院公式サイト・電話確認をもとに作成（2026年4月更新）。変更の可能性があるため最新情報は各病院地域連携室へ直接ご確認ください。
 </footer>
 
 <script>
+  // フィルターバー
   const btns  = document.querySelectorAll('.fbtn');
   const cards = document.querySelectorAll('.card');
   btns.forEach(btn => {
@@ -838,6 +1120,17 @@ CT/MRIの場合、検査<strong>6時間前</strong>から絶食
       cards.forEach(c => {
         c.classList.toggle('hidden', f !== 'all' && c.dataset.hospital !== f);
       });
+    });
+  });
+
+  // カード内タブ
+  document.querySelectorAll('.ctab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const card = tab.closest('.card');
+      card.querySelectorAll('.ctab').forEach(t => t.classList.remove('active'));
+      card.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById(tab.dataset.pane).classList.add('active');
     });
   });
 </script>
