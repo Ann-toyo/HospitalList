@@ -314,6 +314,7 @@ footer {
   border-bottom-color: #fff;
   z-index: 1;
 }
+.ctab.single { cursor: default; pointer-events: none; }
 .tab-pane { display: none; }
 .tab-pane.active { display: block; }
 
@@ -782,6 +783,9 @@ FAX 028-673-1961（直通）</div>
       <span class="tel-line"><span class="tel-label">TEL（地域連携室）</span> 028-665-2101</span>
     </div>
   </div>
+  <div class="card-tabs">
+    <button class="ctab active single">外来予約</button>
+  </div>
   <div class="card-label">
     <span class="label-main">予約する（電話 or LINE）</span>
     <span class="label-sub">｜ 公式：任意</span>
@@ -831,6 +835,9 @@ FAX 028-666-7504
     <div class="h-tel-box">
       <span class="tel-line"><span class="tel-label">FAX（予約）</span> 0285-44-5397</span>
     </div>
+  </div>
+  <div class="card-tabs">
+    <button class="ctab active single">外来予約</button>
   </div>
   <div class="card-label">
     <span class="label-main">予約する（FAX）</span>
@@ -890,6 +897,9 @@ e-mail: byoushin@jichi.ac.jp</div>
     <div class="h-tel-box">
       <span class="tel-line"><span class="tel-label">TEL（地域連携室）</span> 028-655-1161</span>
     </div>
+  </div>
+  <div class="card-tabs">
+    <button class="ctab active single">外来予約</button>
   </div>
   <div class="card-label">
     <span class="label-main">予約する（電話）</span>
@@ -1059,6 +1069,9 @@ FAX <strong>028-611-5499</strong>
       <span class="tel-line"><span class="tel-label">TEL（地域連携室直通）</span> 028-622-0299</span>
     </div>
   </div>
+  <div class="card-tabs">
+    <button class="ctab active single">外来予約</button>
+  </div>
   <div class="card-label">
     <span class="label-main">予約する（電話）</span>
     <span class="label-sub">｜ 公式：必須</span>
@@ -1113,6 +1126,9 @@ FAX 028-622-5298（直通）
     <div class="h-tel-box">
       <span class="tel-line"><span class="tel-label">TEL（CT/MRI予約）</span> 028-657-7303</span>
     </div>
+  </div>
+  <div class="card-tabs">
+    <button class="ctab active single">MRI検査予約</button>
   </div>
   <div class="card-label">
     <span class="label-main">予約する（電話）</span>
@@ -1181,23 +1197,25 @@ FAX 028-622-5298（直通）
       <span class="tel-line"><span class="tel-label">FAX</span> 0287-23-9991</span>
     </div>
   </div>
+  <div class="card-tabs">
+    <button class="ctab active single">外来予約</button>
+  </div>
   <div class="card-body">
     <div class="card-label">
-      <span class="label-main">予約する（電話 or FAX）</span>
+      <span class="label-main">予約する（電話）</span>
       <span class="label-sub">｜ 公式：必須</span>
     </div>
     <div class="row3">
       <div class="sec s-method">
         <div class="sec-label">予約方法</div>
         <div class="sec-content">TEL <strong>0287-23-9777</strong>（地域医療連携室・直通）
-FAX <strong>0287-23-9991</strong>（24時間受付）
 月〜金 8:30〜16:51 ／ 土 8:30〜12:30
-※第2・4・5土曜休診
-※FAXへの返信は翌業務時間内</div>
+※第2・4・5土曜休診</div>
       </div>
       <div class="sec s-prepare">
         <div class="sec-label">書類の準備</div>
-        <div class="sec-content">診療情報提供書</div>
+        <div class="sec-content">診療情報提供書
+電話予約後、予約票がFAXで届く</div>
       </div>
       <div class="sec s-patient">
         <div class="sec-label">患者への説明</div>
@@ -1213,8 +1231,7 @@ FAX <strong>0287-23-9991</strong>（24時間受付）
     <div class="row1">
       <div class="sec s-note">
         <div class="sec-label">備考</div>
-        <div class="sec-content">・電話予約時は患者基礎情報の確認あり、予約票がFAXで届く
-・FAX予約：診療情報提供書をFAXし、折り返し予約票が届く</div>
+        <div class="sec-content">・電話予約時は患者基礎情報の確認あり</div>
       </div>
     </div>
     <div class="url-footer">
