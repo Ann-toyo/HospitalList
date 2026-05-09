@@ -225,13 +225,40 @@ main {
 .sec.s-result .sec-label { color: #1A5C32; }
 .sec.s-result .sec-label::before { background: #2E8B50; }
 
-/* 科別メモ */
+/* 科別メモ（旧） */
 .sec.s-dept {
   background: #FEFCE8;
   border-left: 4px solid #CA8A04;
 }
 .sec.s-dept .sec-label { color: #713F12; }
 .sec.s-dept .sec-label::before { background: #CA8A04; }
+
+/* 科別補足ボックス */
+.dept-memo {
+  background: #FFFBEB;
+  border: 2px solid #F59E0B;
+  border-radius: 8px;
+  margin: 10px 14px 4px;
+  padding: 10px 14px 12px;
+}
+.dept-memo-title {
+  font-size: 15px;
+  font-weight: bold;
+  color: #92400E;
+  margin-bottom: 8px;
+}
+.dept-memo-content {
+  font-size: 17px;
+  line-height: 1.75;
+  white-space: pre-wrap;
+}
+.dept-memo-footer {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #666;
+  border-top: 1px solid #FCD34D;
+  padding-top: 7px;
+}
 
 /* 備考 */
 .sec.s-note {
@@ -378,10 +405,18 @@ footer {
   <!-- 外来予約 -->
   <div class="tab-pane active" id="dokkyo-gairai">
     <div class="card-label">
-      <span class="label-main">予約する（電話）</span>
-      <span class="label-sub">｜ 公式：専門外来は予約制</span>
+      <span class="label-main">科によって異なります（要確認）</span>
     </div>
     <div class="card-body">
+      <div class="dept-memo">
+        <div class="dept-memo-title">📋 科別の予約補足情報</div>
+        <div class="dept-memo-content"><strong>小児外科</strong>：予約不要
+　月・水・金・土（第3土曜以外）8:00〜11:00に来院
+　※火・木は初診不可、第3土曜は休診
+
+<strong>総合診療科</strong>：予約制</div>
+        <div class="dept-memo-footer">記載のない科は <a href="https://www.dokkyomed.ac.jp/hosp-m/outpatient/" target="_blank" rel="noopener noreferrer">外来診療医一覧表</a> を確認し、不明な場合は診療科へ直接電話</div>
+      </div>
       <div class="row3">
         <div class="sec s-method">
           <div class="sec-label">予約方法</div>
@@ -409,16 +444,6 @@ footer {
         <div class="sec s-note">
           <div class="sec-label">備考</div>
           <div class="sec-content">・電話・名刺のみの紹介は不可（選定療養費が発生）</div>
-        </div>
-      </div>
-      <div class="row1">
-        <div class="sec s-dept">
-          <div class="sec-label">科別の補足情報</div>
-          <div class="sec-content"><strong>小児外科</strong>：予約不要
-　月・水・金・土（第3土曜以外）8:00〜11:00に来院
-　※火・木は初診不可、第3土曜は休診
-
-<strong>総合診療科</strong>：予約制</div>
         </div>
       </div>
       <div class="url-footer">
