@@ -122,6 +122,13 @@ main {
   font-size: 17px;
 }
 .label-sub { color: #666; }
+.label-link {
+  font-size: 0.78rem;
+  color: #555;
+  text-decoration: underline;
+  margin-left: auto;
+  white-space: nowrap;
+}
 
 /* ─── 予約案内ノート ──────────────────────── */
 .booking-note {
@@ -403,7 +410,8 @@ footer {
       <div class="h-main">獨協医科大学病院</div>
     </div>
     <div class="h-tel-box">
-      <span class="tel-line"><span class="tel-label">代表</span> 0282-86-1111</span>
+      <span class="tel-line"><span class="tel-label">予約</span> <a href="https://www.dokkyomed.ac.jp/hosp-m/outpatient/" target="_blank" rel="noopener noreferrer">各診療科へ連絡</a></span>
+      <span class="tel-line"><span class="tel-label">代表（夜間救急）</span> 0282-86-1111</span>
     </div>
   </div>
   <div class="card-tabs">
@@ -415,6 +423,7 @@ footer {
   <div class="tab-pane active" id="dokkyo-gairai">
     <div class="card-label">
       <span class="label-main">予約の有無は科により異なる（要確認）</span>
+      <a href="https://www.dokkyomed.ac.jp/hosp-m/outpatient/" target="_blank" rel="noopener noreferrer" class="label-link">詳細はこちら</a>
     </div>
     <div class="card-body">
       <div class="dept-memo">
@@ -893,7 +902,8 @@ FAX 028-666-7504
     <button class="ctab active single">外来予約</button>
   </div>
   <div class="card-label">
-    <span class="label-main">予約：<a href="https://www.jichi.ac.jp/hospital/top/outpatient/day-time.html" target="_blank" rel="noopener noreferrer">科により異なる（要確認）</a></span>
+    <span class="label-main">予約の有無は科により異なる（要確認）</span>
+    <a href="https://www.jichi.ac.jp/hospital/top/outpatient/day-time.html" target="_blank" rel="noopener noreferrer" class="label-link">詳細はこちら</a>
   </div>
   <div class="booking-note">可能な場合はクリニックから予約を入れる。時間外の場合は予約なしで受診していただく。</div>
   <div class="card-body">
