@@ -123,6 +123,15 @@ main {
 }
 .label-sub { color: #666; }
 
+/* ─── 予約案内ノート ──────────────────────── */
+.booking-note {
+  font-size: 0.8rem;
+  color: #555;
+  background: #f7f7f7;
+  padding: 5px 14px;
+  border-left: 3px solid #bbb;
+}
+
 /* ─── カードボディ ──────────────────────── */
 .card-body { padding: 12px 14px 0; }
 
@@ -407,6 +416,7 @@ footer {
     <div class="card-label">
       <span class="label-main">予約の有無は科により異なる（要確認）</span>
     </div>
+    <div class="booking-note">可能な場合はクリニックから予約を入れる。時間外の場合は患者さん自身に取っていただく。</div>
     <div class="card-body">
       <div class="dept-memo">
         <div class="dept-memo-title">科別の予約情報</div>
@@ -535,9 +545,9 @@ PETセンターからクリニックへ
   <!-- 外来予約 -->
   <div class="tab-pane active" id="saiseikai-gairai">
     <div class="card-label">
-      <span class="label-main">予約する（電話）</span>
-      <span class="label-sub">｜ 公式：任意</span>
+      <span class="label-main">予約：任意</span>
     </div>
+    <div class="booking-note">可能な場合はクリニックから予約を入れる。時間外の場合は患者さん自身に取っていただく。</div>
     <div class="card-body">
       <div class="row3">
         <div class="sec s-method">
@@ -723,9 +733,9 @@ MRIは月〜金のみ対応
   <!-- 外来予約 -->
   <div class="tab-pane active" id="nho-u-gairai">
     <div class="card-label">
-      <span class="label-main">予約する（電話）</span>
-      <span class="label-sub">｜ 公式：任意</span>
+      <span class="label-main">予約：任意</span>
     </div>
+    <div class="booking-note">可能な場合はクリニックから予約を入れる。時間外の場合は患者さん自身に取っていただく。</div>
     <div class="card-body">
       <div class="row3">
         <div class="sec s-method">
@@ -830,9 +840,9 @@ FAX 028-673-1961（直通）</div>
     <button class="ctab active single">外来予約</button>
   </div>
   <div class="card-label">
-    <span class="label-main">予約する（電話 or LINE）</span>
-    <span class="label-sub">｜ 公式：任意</span>
+    <span class="label-main">予約：任意</span>
   </div>
+  <div class="booking-note">可能な場合はクリニックから予約を入れる。時間外の場合は患者さん自身に取っていただく。</div>
   <div class="card-body">
     <div class="row3">
       <div class="sec s-method">
@@ -883,9 +893,9 @@ FAX 028-666-7504
     <button class="ctab active single">外来予約</button>
   </div>
   <div class="card-label">
-    <span class="label-main">予約する（FAX）</span>
-    <span class="label-sub">｜ 公式：必須（FAX予約のみ）</span>
+    <span class="label-main">予約：<a href="https://www.jichi.ac.jp/hospital/top/outpatient/day-time.html" target="_blank" rel="noopener noreferrer">科により異なる（要確認）</a></span>
   </div>
+  <div class="booking-note">可能な場合はクリニックから予約を入れる。時間外の場合は予約なしで受診していただく。</div>
   <div class="card-body">
     <div class="row3">
       <div class="sec s-method">
@@ -945,9 +955,9 @@ e-mail: byoushin@jichi.ac.jp</div>
     <button class="ctab active single">外来予約</button>
   </div>
   <div class="card-label">
-    <span class="label-main">予約する（電話）</span>
-    <span class="label-sub">｜ 公式：予約優先</span>
+    <span class="label-main">予約：任意（午後は予約のみ）</span>
   </div>
+  <div class="booking-note">可能な場合はクリニックから予約を入れる。時間外の場合は患者さん自身に取っていただく。</div>
   <div class="card-body">
     <div class="row3">
       <div class="sec s-method">
@@ -1004,9 +1014,9 @@ FAX 028-655-1167
   <!-- 外来予約 -->
   <div class="tab-pane active" id="cancer-gairai">
     <div class="card-label">
-      <span class="label-main">予約する（電話）</span>
-      <span class="label-sub">｜ 公式：必須</span>
+      <span class="label-main">予約：<strong>必須</strong></span>
     </div>
+    <div class="booking-note">可能な場合はクリニックから予約を入れる。時間外の場合は患者さん自身に取っていただく。</div>
     <div class="card-body">
       <div class="row3">
         <div class="sec s-method">
@@ -1116,9 +1126,9 @@ FAX <strong>028-611-5499</strong>
     <button class="ctab active single">外来予約</button>
   </div>
   <div class="card-label">
-    <span class="label-main">予約する（電話）</span>
-    <span class="label-sub">｜ 公式：必須</span>
+    <span class="label-main">予約：任意（精神科のみ必須）</span>
   </div>
+  <div class="booking-note">可能な場合はクリニックから予約を入れる。時間外の場合は患者さん自身に取っていただく。</div>
   <div class="card-body">
     <div class="row3">
       <div class="sec s-method">
@@ -1243,11 +1253,11 @@ FAX 028-622-5298（直通）
   <div class="card-tabs">
     <button class="ctab active single">外来予約</button>
   </div>
+  <div class="card-label">
+    <span class="label-main">予約：任意（予約優先）</span>
+  </div>
+  <div class="booking-note">可能な場合はクリニックから予約を入れる。時間外の場合は患者さん自身に取っていただく。</div>
   <div class="card-body">
-    <div class="card-label">
-      <span class="label-main">予約する（電話）</span>
-      <span class="label-sub">｜ 公式：必須</span>
-    </div>
     <div class="row3">
       <div class="sec s-method">
         <div class="sec-label">予約方法</div>
