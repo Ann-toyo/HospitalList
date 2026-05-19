@@ -133,6 +133,29 @@ main {
   white-space: nowrap;
 }
 
+/* ─── 運用方針バナー ──────────────────────── */
+.policy-banner {
+  background: #EBF3FB;
+  border: 1.5px solid #2E75B6;
+  border-radius: 8px;
+  padding: 12px 18px;
+  font-size: 16px;
+  line-height: 1.9;
+  color: #1A3A60;
+}
+.policy-banner-title {
+  font-weight: bold;
+  font-size: 17px;
+  margin-bottom: 5px;
+}
+.policy-banner-note {
+  font-size: 14px;
+  color: #555;
+  border-top: 1px solid #C0D4EC;
+  margin-top: 8px;
+  padding-top: 6px;
+}
+
 /* ─── 予約案内ノート ──────────────────────── */
 .booking-note {
   font-size: 0.8rem;
@@ -140,6 +163,21 @@ main {
   background: #f7f7f7;
   padding: 5px 14px;
   border-left: 3px solid #bbb;
+}
+.booking-note--ok {
+  border-left-color: #2E8B50;
+  background: #F0FAF4;
+  color: #1A4D2A;
+}
+.booking-note--varies {
+  border-left-color: #D97706;
+  background: #FFFBF0;
+  color: #5C3D00;
+}
+.booking-note--required {
+  border-left-color: #DC2626;
+  background: #FEF2F2;
+  color: #7F1D1D;
 }
 
 /* ─── カードボディ ──────────────────────── */
@@ -406,6 +444,13 @@ footer {
 
 <main>
 
+<div class="policy-banner">
+  <div class="policy-banner-title">📋 外来紹介の運用方針</div>
+  紹介状をお渡しし、患者さんご自身に受診・予約確認をしていただきます。<br>
+  予約が必要かどうかは病院・科により異なります。心配な場合は各病院へ事前にご確認いただくようお伝えください。
+  <div class="policy-banner-note">※ 検査紹介・当日緊急紹介はクリニックから予約を入れます（先生の指示に従う）</div>
+</div>
+
 <!-- ━━━ ① 獨協医科大学病院 ━━━ -->
 <div class="card" data-hospital="dokkyo" style="--hcolor:#1F4E79">
   <div class="card-head">
@@ -438,7 +483,7 @@ footer {
 ▢ <strong>総合診療科</strong>：予約制　<strong>0282-87-2054</strong></div>
         <div class="dept-memo-footer">記載のない科は <a href="https://www.dokkyomed.ac.jp/hosp-m/outpatient/" target="_blank" rel="noopener noreferrer">外来診療医一覧表</a> を確認し、不明な場合は診療科へ直接電話</div>
       </div>
-      <div class="booking-note">予約が必要な場合：可能であればクリニックから。時間外は患者さん自身で。</div>
+      <div class="booking-note booking-note--varies">科によっては予約が必要です。<a href="https://www.dokkyomed.ac.jp/hosp-m/outpatient/" target="_blank" rel="noopener noreferrer">外来診療医一覧</a>で担当科を確認し、予約が必要な場合は担当科へ直接ご連絡いただくようお伝えください。</div>
       <div class="row3">
         <div class="sec s-method">
           <div class="sec-label">予約方法</div>
@@ -559,7 +604,7 @@ PETセンターからクリニックへ
     <div class="card-label">
       <span class="label-main">予約：任意</span>
     </div>
-    <div class="booking-note">可能な場合はクリニックから予約を入れる。時間外の場合は患者さん自身に取っていただく。</div>
+    <div class="booking-note booking-note--varies">科によっては予約が必要です。担当科へ事前にご連絡・ご予約いただくようお伝えください。（外来予約：028-626-5595）</div>
     <div class="card-body">
       <div class="row3">
         <div class="sec s-method">
@@ -747,7 +792,7 @@ MRIは月〜金のみ対応
     <div class="card-label">
       <span class="label-main">予約：任意</span>
     </div>
-    <div class="booking-note">可能な場合はクリニックから予約を入れる。時間外の場合は患者さん自身に取っていただく。</div>
+    <div class="booking-note booking-note--ok">予約不要。紹介状を持参して受付へ（8:30〜11:00）。心配な場合は事前に確認を。（連携室：028-673-9132）</div>
     <div class="card-body">
       <div class="row3">
         <div class="sec s-method">
@@ -861,7 +906,7 @@ FAX 028-673-1961（直通）</div>
   <div class="card-label">
     <span class="label-main">予約：任意</span>
   </div>
-  <div class="booking-note">可能な場合はクリニックから予約を入れる。時間外の場合は患者さん自身に取っていただく。</div>
+  <div class="booking-note booking-note--ok">予約不要。紹介状を持参して受付へ。心配な場合は事前に確認を。（地域連携室：028-665-2101）</div>
   <div class="card-body">
     <div class="row3">
       <div class="sec s-method">
@@ -916,7 +961,7 @@ FAX 028-666-7504
     <span class="label-main">予約の有無は科により異なる（要確認）</span>
     <a href="https://www.jichi.ac.jp/hospital/top/outpatient/day-time.html" target="_blank" rel="noopener noreferrer" class="label-link">詳細はこちら</a>
   </div>
-  <div class="booking-note">可能な場合はクリニックから予約を入れる。時間外の場合は予約なしで受診していただく。</div>
+  <div class="booking-note booking-note--ok">予約なしで紹介状を持参して受付へ（8:30〜11:00）。※患者さん自身での予約は不可のため、予約が必要な科はクリニックからFAX予約。（FAX：0285-44-5397）</div>
   <div class="card-body">
     <div class="row3">
       <div class="sec s-method">
@@ -978,7 +1023,7 @@ e-mail: byoushin@jichi.ac.jp</div>
   <div class="card-label">
     <span class="label-main">予約：任意（午後は予約のみ）</span>
   </div>
-  <div class="booking-note">可能な場合はクリニックから予約を入れる。時間外の場合は患者さん自身に取っていただく。</div>
+  <div class="booking-note booking-note--ok">午前（〜11:30）は予約不要。紹介状を持参して受付へ。午後受診の場合は要予約。（地域連携室：028-655-1161）</div>
   <div class="card-body">
     <div class="row3">
       <div class="sec s-method">
@@ -1037,7 +1082,7 @@ FAX 028-655-1167
     <div class="card-label">
       <span class="label-main">予約：<strong>必須</strong></span>
     </div>
-    <div class="booking-note">可能な場合はクリニックから予約を入れる。時間外の場合は患者さん自身に取っていただく。</div>
+    <div class="booking-note booking-note--required">必ず事前に予約してから来院。患者さんご自身でお電話いただけます。（予約センター：028-658-5012）</div>
     <div class="card-body">
       <div class="row3">
         <div class="sec s-method">
@@ -1149,7 +1194,7 @@ FAX <strong>028-611-5499</strong>
   <div class="card-label">
     <span class="label-main">予約：任意（精神科のみ必須）</span>
   </div>
-  <div class="booking-note">可能な場合はクリニックから予約を入れる。時間外の場合は患者さん自身に取っていただく。</div>
+  <div class="booking-note booking-note--ok">予約不要。紹介状を持参して受付へ（8:30〜11:00）。※精神科のみ予約必須のためクリニックから連絡。</div>
   <div class="card-body">
     <div class="row3">
       <div class="sec s-method">
@@ -1277,7 +1322,7 @@ FAX 028-622-5298（直通）
   <div class="card-label">
     <span class="label-main">予約：任意（予約優先）</span>
   </div>
-  <div class="booking-note">可能な場合はクリニックから予約を入れる。時間外の場合は患者さん自身に取っていただく。</div>
+  <div class="booking-note booking-note--ok">予約なしでも受診可能（予約優先）。心配な場合は事前にご連絡いただくようお伝えください。（連携室：0287-23-9777）</div>
   <div class="card-body">
     <div class="row3">
       <div class="sec s-method">
